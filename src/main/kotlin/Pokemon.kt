@@ -1,9 +1,18 @@
 open class Pokemon(
-    var name: String, var maxHp: Int, var currentHp: Int, var atk: Double, var def: Double,
-    var poison: Boolean, var paralyzed: Boolean, var sleep: Boolean, var type1: String, var type2: String
+    var name: String,
+    var maxHp: Int,
+    var currentHp: Int,
+    var atk: Double,
+    var def: Double,
+    var type1: String,
+    var type2: String
 ) {
+    var poison: Boolean = false
+    var paralyze: Boolean = false
+    var sleep: Boolean = false
+    var confusion: Boolean = false
     override fun toString(): String {
-        return "$name hat noch $currentHp/$maxHp HP"
+        return name
     }
 
     fun renamePokemon() {
@@ -21,6 +30,8 @@ open class Pokemon(
     }
 
     fun displayHpBar() {
+        if (currentHp < 1)
+            currentHp = 0
         val hpBarLength = 20
         val hpPercentage = (currentHp.toDouble() / maxHp.toDouble() * 100.0).toInt()
         val currentHPBarLength = (hpPercentage * hpBarLength / 100).coerceIn(0, hpBarLength)
@@ -36,14 +47,19 @@ open class Pokemon(
         val currentHPBar = " ".repeat(currentHPBarLength)
         val maxHPBar = " ".repeat(maxHPBarLength)
 
-        val print = when {
-            paralyzed -> "⚡️[PAR]"
+        val status = when {
+            paralyze -> "⚡️[PAR]"
             sleep -> "💤[SLF]"
             poison -> "☠️[GIF]"
             else -> ""
         }
         val hpInfo = "[$currentHp/$maxHp]".padStart("$name's HP: $currentHPBar$maxHPBar".length)
-        println("${name}'s HP: $currentHPColor$currentHPBar$resetColor$maxHPColor$maxHPBar$resetColor $print\n$hpInfo\n")
+        println("${name}'s HP: $currentHPColor$currentHPBar$resetColor$maxHPColor$maxHPBar$resetColor $status\n$hpInfo\n")
     }
 
+//    fun heal(amount: Int) {
+//        currentHp += amount
+//        if (currentHp > maxHp)
+//            currentHp = maxHp
+//    }
 }

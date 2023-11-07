@@ -4,15 +4,12 @@ class Bisaflor(
     currentHp: Int = maxHp,
     atk: Double = (8..12).random() / 10.0,
     def: Double = (8..12).random() / 10.0,
-    poison: Boolean = false,
-    paralyzed: Boolean = false,
-    sleep: Boolean = false,
     type1: String = "Pflanze",
     type2: String = "Gift"
-) : Pokemon(name, maxHp, currentHp, atk, def, poison, paralyzed, sleep, type1, type2) {
+) : Pokemon(name, maxHp, currentHp, atk, def, type1, type2) {
     fun rankenhieb() {
         val target = selectEnemyTeam()
-        val damage = 40.0
+        val damage = 40
         var multiplier1 = 1.0
         var multiplier2 = 1.0
         when (target.type1) {
@@ -38,11 +35,11 @@ class Bisaflor(
             "Drache" -> multiplier2 = 0.5
         }
         val damageMultiplied = damage * multiplier1 * multiplier2
-        val finalDamage = damageMultiplied * atk * target.def
+        val finalDamage = damageMultiplied * atk / target.def
         println("$name greift ${target.name} mit Rankenhieb an.")
-        if (damage > damageMultiplied)
+        if (damage < damageMultiplied)
             println("Das war sehr effektiv!")
-        else if (damage < damageMultiplied)
+        else if (damage > damageMultiplied)
             println("Das war nicht so effektiv.")
         target.currentHp -= finalDamage.toInt()
         target.displayHpBar()
@@ -50,7 +47,7 @@ class Bisaflor(
 
     fun gigasauger() {
         val target = selectEnemyTeam()
-        val damage = 60.0
+        val damage = 60
         val accuracy = 90
         var multiplier1 = 1.0
         var multiplier2 = 1.0
@@ -77,18 +74,18 @@ class Bisaflor(
             "Drache" -> multiplier2 = 0.5
         }
         val damageMultiplied = damage * multiplier1 * multiplier2
-        val finalDamage = damageMultiplied * atk * target.def
+        val finalDamage = damageMultiplied * atk / target.def
         val randomizer = (1..100).random()
+        println("$name greift ${target.name} mit Gigasauger an.")
         if (randomizer <= accuracy) {
-            println("$name greift ${target.name} mit Gigasauger an.")
-            if (damage > damageMultiplied)
+            if (damage < damageMultiplied)
                 println("Das war sehr effektiv!")
-            else if (damage < damageMultiplied)
+            else if (damage > damageMultiplied)
                 println("Das war nicht so effektiv.")
             target.currentHp -= finalDamage.toInt()
             target.displayHpBar()
             println("$name regeniert seine HP mit einem Teil des veursachten Schadens.")
-            heal(this, finalDamage.toInt() / 2)
+            heal(this, (finalDamage / 2).toInt())
             this.displayHpBar()
         } else println("Deine Attacke ging daneben.")
     }
@@ -103,7 +100,7 @@ class Bisaflor(
 
     fun matschbombe() {
         val target = selectEnemyTeam()
-        val damage = 30.0
+        val damage = 30
         var multiplier1 = 1.0
         var multiplier2 = 1.0
         when (target.type1) {
@@ -121,19 +118,21 @@ class Bisaflor(
             "Geist" -> multiplier2 = 0.5
         }
         val damageMultiplied = damage * multiplier1 * multiplier2
-        val finalDamage = damageMultiplied * atk * target.def
-        println("$name greift ${target.name} mit Rankenhieb an.")
-        if (damage > damageMultiplied)
+        val finalDamage = damageMultiplied * atk / target.def
+        println("$name greift ${target.name} mit Matschbombe an.")
+        if (damage < damageMultiplied)
             println("Das war sehr effektiv!")
-        else if (damage < damageMultiplied)
+        else if (damage > damageMultiplied)
             println("Das war nicht so effektiv.")
         target.currentHp -= finalDamage.toInt()
-        val accuracy = 30
-        val randomizer = (1..100).random()
-        if (randomizer <= accuracy) {
-            target.poison = true
-            println("${target.name} wurde vergiftet.")
-        }
+        if (checkStatus(target)) {
+            val accuracy = 30
+            val randomizer = (1..100).random()
+            if (randomizer <= accuracy) {
+                target.poison = true
+                println("${target.name} wurde vergiftet.")
+            }
+        } else println("Es kann nicht vergiftet werden.")
         target.displayHpBar()
     }
 }
