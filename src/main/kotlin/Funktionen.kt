@@ -186,10 +186,10 @@ fun startgame() {
                 println(
                     """
                                 Welche Attacke möchtest du auswählen?
-                                1 -> Glut
-                                2 -> Flammenwurf
-                                3 -> Geowurf
-                                4 -> Heuler
+                                1 -> Glut [SCH 40 / GEN 100]
+                                2 -> Flammenwurf [SCH 80 / GEN 80]
+                                3 -> Geowurf [SCH 40-120 / GEN 80]
+                                4 -> Heuler [ATK reduzieren]
                             """.trimIndent()
                 )
                 inputInt = readln().toInt()
@@ -259,10 +259,10 @@ fun startgame() {
                 println(
                     """
                                 Welche Attacke möchtest du auswählen?
-                                1 -> Rankenhieb
-                                2 -> Gigasauger
-                                3 -> Matschbombe
-                                4 -> Reflektor
+                                1 -> Rankenhieb [SCH 40 / GEN 100]
+                                2 -> Gigasauger [SCH 60 / GEN 90 / Heilt Teil vom Schaden]
+                                3 -> Matschbombe [SCH 30 / GEN 100] & [GIF Gegner / GEN 30]
+                                4 -> Reflektor [Erhöht DEF vom Team]
                             """.trimIndent()
                 )
                 inputInt = readln().toInt()
@@ -332,10 +332,10 @@ fun startgame() {
                 println(
                     """
                                 Welche Attacke möchtest du auswählen?
-                                1 -> Blubber
-                                2 -> Aquaknarre
-                                3 -> Hydropumpe
-                                4 -> Bodycheck
+                                1 -> Blubber [SCH 40 / GEN 100]
+                                2 -> Aquaknarre [SCH 80 / GEN 80]
+                                3 -> Hydropumpe [SCH 120 / GEN 60]
+                                4 -> Bodycheck [SCH 150 / GEN 90] & [Anwender erleidet Schaden durch Rückstoß]
                             """.trimIndent()
                 )
                 inputInt = readln().toInt()
