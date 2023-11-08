@@ -1,9 +1,9 @@
 open class Glurak(
     name: String = "Glurak",
-    maxHp: Int = (750..1250).random(),
+    maxHp: Int = (300..500).random(),
     currentHp: Int = maxHp,
-    atk: Double = (8..12).random() / 10.0,
-    def: Double = (8..12).random() / 10.0,
+    atk: Double = (10..12).random() / 10.0,
+    def: Double = (8..10).random() / 10.0,
     type1: String = "Feuer",
     type2: String = "Flug"
 ) : Pokemon(name, maxHp, currentHp, atk, def, type1, type2) {
@@ -33,12 +33,22 @@ open class Glurak(
         val damageMultiplied = damage * multiplier1 * multiplier2
         val finalDamage = damageMultiplied * atk / target.def
         println("$name greift ${target.name} mit Glut an.")
-        if (damage < damageMultiplied)
+        Thread.sleep(1000)
+        if (damage < damageMultiplied) {
             println("Das war sehr effektiv!")
-        else if (damage > damageMultiplied)
+            Thread.sleep(1000)
+        }
+        else if (damage > damageMultiplied) {
             println("Das war nicht so effektiv.")
+            Thread.sleep(1000)
+        }
         target.currentHp -= finalDamage.toInt()
         target.displayHpBar()
+        Thread.sleep(1000)
+        if (target.currentHp < 1) {
+            println("${target.name}'s HP sind auf 0 gefallen. ${target.name} ist kampfunfähig!")
+            Thread.sleep(1000)
+        }
     }
 
     fun flammenwurf() {
@@ -69,14 +79,27 @@ open class Glurak(
         val finalDamage = damageMultiplied * atk / target.def
         val randomizer = (1..100).random()
         println("$name greift ${target.name} mit Flammenwurf an.")
+        Thread.sleep(1000)
         if (randomizer <= accuracy) {
-            if (damage < damageMultiplied)
+            if (damage < damageMultiplied) {
                 println("Das war sehr effektiv!")
-            else if (damage > damageMultiplied)
+                Thread.sleep(1000)
+            }
+            else if (damage > damageMultiplied) {
                 println("Das war nicht so effektiv.")
+                Thread.sleep(1000)
+            }
             target.currentHp -= finalDamage.toInt()
             target.displayHpBar()
-        } else println("Deine Attacke ging daneben.")
+            Thread.sleep(1000)
+        } else {
+            println("Deine Attacke ging daneben.")
+            Thread.sleep(1000)
+        }
+        if (target.currentHp < 1) {
+            println("${target.name}'s HP sind auf 0 gefallen. ${target.name} ist kampfunfähig!")
+            Thread.sleep(1000)
+        }
     }
 
     fun geowurf() {
@@ -109,25 +132,40 @@ open class Glurak(
         val finalDamage = damageMultiplied * atk / target.def
         val randomizer = (1..100).random()
         println("$name greift ${target.name} mit Geowurf an.")
+        Thread.sleep(1000)
         if (damageMultiplied < 1){
             println("Der Angriff zeigt keine Wirkung bei ${target.name}.")
+            Thread.sleep(1000)
         } else {
             if (randomizer <= accuracy) {
-                if (damage < damageMultiplied)
+                if (damage < damageMultiplied) {
                     println("Das war sehr effektiv!")
-                else if (damage > damageMultiplied)
+                    Thread.sleep(1000)
+                }
+                else if (damage > damageMultiplied) {
                     println("Das war nicht so effektiv.")
+                    Thread.sleep(1000)
+                }
                 target.currentHp -= finalDamage.toInt()
                 target.displayHpBar()
-            } else println("Deine Attacke ging daneben.")
+                Thread.sleep(1000)
+            } else {
+                println("Deine Attacke ging daneben.")
+                Thread.sleep(1000)
+            }
+        }
+        if (target.currentHp < 1) {
+            println("${target.name}'s HP sind auf 0 gefallen. ${target.name} ist kampfunfähig!")
+            Thread.sleep(1000)
         }
     }
 
     fun heuler() {
         val target = selectEnemyTeam()
-        print("$name setzt Heuler bei ${target.name} ein.")
+        print("$name setzt Heuler bei ${target.name} ein")
         dots()
         println("${target.name}'s ATK-Wert ist gesunken!")
+        Thread.sleep(1000)
         target.atk *= 0.9
     }
 

@@ -1,7 +1,7 @@
 class Spieler(
     var name: String,
-    var team: MutableList<Pokemon> = mutableListOf(Glurak(), Turtok(), Bisaflor()),
-    var beutel: MutableList<Items> = mutableListOf(Trank(), TopTrank(), Gegengift(), Paraheiler(), Aufwecker(), Beleber())
+    var team: MutableList<Pokemon> = mutableListOf(Glurak(), Bisaflor(), Turtok()),
+    var beutel: MutableList<Items> = mutableListOf(Trank(), TopTrank(), Gegengift())
 ) {
     fun infoTeam() {
         print("Dein Team besteht aus: ")

@@ -1,15 +1,15 @@
 open class Dragoran(
     name: String = "Dragoran",
-    maxHp: Int = (750..1250).random(),
+    maxHp: Int = (300..500).random(),
     currentHp: Int = maxHp,
-    atk: Double = (8..12).random() / 10.0,
-    def: Double = (8..12).random() / 10.0,
+    atk: Double = (9..11).random() / 10.0,
+    def: Double = (9..11).random() / 10.0,
     type1: String = "Drache",
     type2: String = "Flug"
 ) : Pokemon(name, maxHp, currentHp, atk, def, type1, type2) {
 
     fun windhose() {
-        val target = PLAYERTEAM.random()
+        val target = PLAYERTEAM.filter { it.currentHp > 0 }.random()
         val damage = 40
         var multiplier1 = 1.0
         var multiplier2 = 1.0
@@ -22,15 +22,25 @@ open class Dragoran(
         val damageMultiplied = damage * multiplier1 * multiplier2
         val finalDamage = damageMultiplied * atk / target.def
         println("$name greift ${target.name} mit Windhose an.")
-        if (damage < damageMultiplied)
+        Thread.sleep(1000)
+        if (damage < damageMultiplied) {
             println("Das war sehr effektiv!")
-        else if (damage > damageMultiplied)
+            Thread.sleep(1000)
+        }
+        else if (damage > damageMultiplied) {
             println("Das war nicht so effektiv.")
+            Thread.sleep(1000)
+        }
         target.currentHp -= finalDamage.toInt()
         target.displayHpBar()
+        Thread.sleep(1000)
+        if (target.currentHp < 1) {
+            println("${target.name}'s HP sind auf 0 gefallen. ${target.name} ist kampfunfähig!")
+            Thread.sleep(1000)
+        }
     }
     fun wutanfall() {
-        val target = PLAYERTEAM.random()
+        val target = PLAYERTEAM.filter { it.currentHp > 0 }.random()
         val damage = 80
         val accuracy = 80
         var multiplier1 = 1.0
@@ -39,23 +49,36 @@ open class Dragoran(
             "Drache" -> multiplier1 = 2.0
         }
         when (target.type2) {
-            "Kampf" -> multiplier2 = 2.0
+            "Drache" -> multiplier2 = 2.0
         }
         val damageMultiplied = damage * multiplier1 * multiplier2
         val finalDamage = damageMultiplied * atk / target.def
         val randomizer = (1..100).random()
         println("$name greift ${target.name} mit Wutanfall an.")
+        Thread.sleep(1000)
         if (randomizer <= accuracy) {
-            if (damage < damageMultiplied)
+            if (damage < damageMultiplied) {
                 println("Das war sehr effektiv!")
-            else if (damage > damageMultiplied)
+                Thread.sleep(1000)
+            }
+            else if (damage > damageMultiplied) {
                 println("Das war nicht so effektiv.")
+                Thread.sleep(1000)
+            }
             target.currentHp -= finalDamage.toInt()
             target.displayHpBar()
-        } else println("Deine Attacke ging daneben.")
+            Thread.sleep(1000)
+        } else {
+            println("Die Attacke ging daneben.")
+            Thread.sleep(1000)
+        }
+        if (target.currentHp < 1) {
+            println("${target.name}'s HP sind auf 0 gefallen. ${target.name} ist kampfunfähig!")
+            Thread.sleep(1000)
+        }
     }
-    fun flügelschlag() {
-        val target = PLAYERTEAM.random()
+    fun fluegelschlag() {
+        val target = PLAYERTEAM.filter { it.currentHp > 0 }.random()
         val damage = 40
         var multiplier1 = 1.0
         var multiplier2 = 1.0
@@ -76,15 +99,25 @@ open class Dragoran(
         val damageMultiplied = damage * multiplier1 * multiplier2
         val finalDamage = damageMultiplied * atk / target.def
         println("$name greift ${target.name} mit Flügelschlag an.")
-        if (damage < damageMultiplied)
+        Thread.sleep(1000)
+        if (damage < damageMultiplied) {
             println("Das war sehr effektiv!")
-        else if (damage > damageMultiplied)
+            Thread.sleep(1000)
+        }
+        else if (damage > damageMultiplied) {
             println("Das war nicht so effektiv.")
+            Thread.sleep(1000)
+        }
         target.currentHp -= finalDamage.toInt()
         target.displayHpBar()
+        Thread.sleep(1000)
+        if (target.currentHp < 1) {
+            println("${target.name}'s HP sind auf 0 gefallen. ${target.name} ist kampfunfähig!")
+            Thread.sleep(1000)
+        }
     }
     fun felsgrab() {
-        val target = selectEnemyTeam()
+        val target = PLAYERTEAM.filter { it.currentHp > 0 }.random()
         val damage = 80
         val accuracy = 80
         var multiplier1 = 1.0
@@ -109,14 +142,26 @@ open class Dragoran(
         val finalDamage = damageMultiplied * atk / target.def
         val randomizer = (1..100).random()
         println("$name greift ${target.name} mit Felsgrab an.")
+        Thread.sleep(1000)
         if (randomizer <= accuracy) {
-            if (damage < damageMultiplied)
+            if (damage < damageMultiplied) {
                 println("Das war sehr effektiv!")
-            else if (damage > damageMultiplied)
+                Thread.sleep(1000)
+            }
+            else if (damage > damageMultiplied) {
                 println("Das war nicht so effektiv.")
+                Thread.sleep(1000)
+            }
             target.currentHp -= finalDamage.toInt()
             target.displayHpBar()
-        } else println("Deine Attacke ging daneben.")
+            Thread.sleep(1000)
+        } else {
+            println("Die Attacke ging daneben.")
+            Thread.sleep(1000)
+        }
+        if (target.currentHp < 1) {
+            println("${target.name}'s HP sind auf 0 gefallen. ${target.name} ist kampfunfähig!")
+            Thread.sleep(1000)
+        }
     }
-
 }

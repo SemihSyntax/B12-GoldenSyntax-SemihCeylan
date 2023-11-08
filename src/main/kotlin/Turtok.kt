@@ -1,9 +1,9 @@
 class Turtok(
     name: String = "Turtok",
-    maxHp: Int = (750..1250).random(),
+    maxHp: Int = (300..500).random(),
     currentHp: Int = maxHp,
-    atk: Double = (8..12).random() / 10.0,
-    def: Double = (8..12).random() / 10.0,
+    atk: Double = (10..12).random() / 10.0,
+    def: Double = (8..10).random() / 10.0,
     type1: String = "Wasser",
     type2: String = ""
 ) : Pokemon(name, maxHp, currentHp, atk, def, type1, type2) {
@@ -31,12 +31,22 @@ class Turtok(
         val damageMultiplied = damage * multiplier1 * multiplier2
         val finalDamage = damageMultiplied * atk / target.def
         println("$name greift ${target.name} mit Blubber an.")
-        if (damage < damageMultiplied)
+        Thread.sleep(1000)
+        if (damage < damageMultiplied) {
             println("Das war sehr effektiv!")
-        else if (damage > damageMultiplied)
+            Thread.sleep(1000)
+        }
+        else if (damage > damageMultiplied) {
             println("Das war nicht so effektiv.")
+            Thread.sleep(1000)
+        }
         target.currentHp -= finalDamage.toInt()
         target.displayHpBar()
+        Thread.sleep(1000)
+        if (target.currentHp < 1) {
+            println("${target.name}'s HP sind auf 0 gefallen. ${target.name} ist kampfunfähig!")
+            Thread.sleep(1000)
+        }
     }
     fun aquaknarre() {
         val target = selectEnemyTeam()
@@ -64,14 +74,27 @@ class Turtok(
         val finalDamage = damageMultiplied * atk / target.def
         val randomizer = (1..100).random()
         println("$name greift ${target.name} mit Aquaknarre an.")
+        Thread.sleep(1000)
         if (randomizer <= accuracy) {
-            if (damage < damageMultiplied)
+            if (damage < damageMultiplied) {
                 println("Das war sehr effektiv!")
-            else if (damage > damageMultiplied)
+                Thread.sleep(1000)
+            }
+            else if (damage > damageMultiplied) {
                 println("Das war nicht so effektiv.")
+                Thread.sleep(1000)
+            }
             target.currentHp -= finalDamage.toInt()
             target.displayHpBar()
-        } else println("Deine Attacke ging daneben.")
+            Thread.sleep(1000)
+        } else {
+            println("Deine Attacke ging daneben.")
+            Thread.sleep(1000)
+        }
+        if (target.currentHp < 1) {
+            println("${target.name}'s HP sind auf 0 gefallen. ${target.name} ist kampfunfähig!")
+            Thread.sleep(1000)
+        }
     }
     fun hydropumpe() {
         val target = selectEnemyTeam()
@@ -99,14 +122,27 @@ class Turtok(
         val finalDamage = damageMultiplied * atk / target.def
         val randomizer = (1..100).random()
         println("$name greift ${target.name} mit Hydropumpe an.")
+        Thread.sleep(1000)
         if (randomizer <= accuracy) {
-            if (damage < damageMultiplied)
+            if (damage < damageMultiplied) {
                 println("Das war sehr effektiv!")
-            else if (damage > damageMultiplied)
+                Thread.sleep(1000)
+            }
+            else if (damage > damageMultiplied) {
                 println("Das war nicht so effektiv.")
+                Thread.sleep(1000)
+            }
             target.currentHp -= finalDamage.toInt()
             target.displayHpBar()
-        } else println("Deine Attacke ging daneben.")
+            Thread.sleep(1000)
+        } else {
+            println("Deine Attacke ging daneben.")
+            Thread.sleep(1000)
+        }
+        if (target.currentHp < 1) {
+            println("${target.name}'s HP sind auf 0 gefallen. ${target.name} ist kampfunfähig!")
+            Thread.sleep(1000)
+        }
     }
     fun bodycheck() {
         val target = selectEnemyTeam()
@@ -126,21 +162,36 @@ class Turtok(
         val finalDamage = damageMultiplied * atk / target.def
         val randomizer = (1..100).random()
         println("$name greift ${target.name} mit Bodycheck an.")
+        Thread.sleep(1000)
         if (damageMultiplied < 1){
             println("Der Angriff zeigt keine Wirkung bei ${target.name}.")
+            Thread.sleep(1000)
         } else {
             if (randomizer <= accuracy) {
-                if (damage < damageMultiplied)
+                if (damage < damageMultiplied) {
                     println("Das war sehr effektiv!")
-                else if (damage > damageMultiplied)
+                    Thread.sleep(1000)
+                }
+                else if (damage > damageMultiplied) {
                     println("Das war nicht so effektiv.")
+                    Thread.sleep(1000)
+                }
                 target.currentHp -= finalDamage.toInt()
                 target.displayHpBar()
                 dots()
                 println("$name erleidet Schaden durch den Rückstöß.")
+                Thread.sleep(1000)
                 this.currentHp -= (finalDamage/4).toInt()
                 this.displayHpBar()
-            } else println("Deine Attacke ging daneben.")
+                Thread.sleep(1000)
+            } else {
+                println("Deine Attacke ging daneben.")
+                Thread.sleep(1000)
+            }
+            if (target.currentHp < 1) {
+                println("${target.name}'s HP sind auf 0 gefallen. ${target.name} ist kampfunfähig!")
+                Thread.sleep(1000)
+            }
         }
     }
 }

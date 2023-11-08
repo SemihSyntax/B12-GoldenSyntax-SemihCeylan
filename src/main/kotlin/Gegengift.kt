@@ -3,5 +3,6 @@ class Gegengift(name: String = "Gegengift", anzahl: Int = 1): Items(name,anzahl)
         val target = selectPlayerTeam()
         target.poison = false
         println("${target.name} wurde mit Gegengift geheilt.")
+        Thread.sleep(1000)
     }
 }

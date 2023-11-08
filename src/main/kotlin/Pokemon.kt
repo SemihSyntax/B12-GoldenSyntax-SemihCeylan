@@ -8,26 +8,26 @@ open class Pokemon(
     var type2: String
 ) {
     var poison: Boolean = false
-    var paralyze: Boolean = false
-    var sleep: Boolean = false
-    var confusion: Boolean = false
+//    var paralyze: Boolean = false
+//    var sleep: Boolean = false
+//    var confusion: Boolean = false
     override fun toString(): String {
         return name
     }
 
-    fun renamePokemon() {
-        println("Willst du den Namen von $name ändern?\n1 --> Ja\n2 --> Nein")
-        var input = readln().toInt()
-        while (input !in 1..2) {
-            println("Leider ist deine Eingabe ungültig.")
-            println("Willst du den Namen von $name ändern?\n1 --> Ja\n2 --> Nein")
-            input = readln().toInt()
-        }
-        if (input == 1) {
-            println("Wie soll dein Pokemon heißen?")
-            name = readln()
-        }
-    }
+//    fun renamePokemon() {
+//        println("Willst du den Namen von $name ändern?\n1 --> Ja\n2 --> Nein")
+//        var input = readln().toInt()
+//        while (input !in 1..2) {
+//            println("Leider ist deine Eingabe ungültig.")
+//            println("Willst du den Namen von $name ändern?\n1 --> Ja\n2 --> Nein")
+//            input = readln().toInt()
+//        }
+//        if (input == 1) {
+//            println("Wie soll dein Pokemon heißen?")
+//            name = readln()
+//        }
+//    }
 
     fun displayHpBar() {
         if (currentHp < 1)
@@ -48,8 +48,8 @@ open class Pokemon(
         val maxHPBar = " ".repeat(maxHPBarLength)
 
         val status = when {
-            paralyze -> "⚡️[PAR]"
-            sleep -> "💤[SLF]"
+//            paralyze -> "⚡️[PAR]"
+//            sleep -> "💤[SLF]"
             poison -> "☠️[GIF]"
             else -> ""
         }
